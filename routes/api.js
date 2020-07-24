@@ -29,16 +29,17 @@ router.put("/api/workouts/:id", ({body, params}, res) => {
 router.get("/api/workouts", (req, res) => {
     Workout.find()
         .then(dbWorkouts => {
-            console.log(dbWorkouts)
+            console.log(dbWorkouts);
             res.json(dbWorkouts);
         })
         .catch(err => {
             res.json(err);
+            console.log(err);
         });
 });
 
 router.get("/api/workouts/range", (req, res) => {
-    Workout.find({}).limit(15)
+    Workout.find({}).sort({ day: -1 }).limit(15)
         .then(dbWorkouts => {
             console.log(dbWorkouts);
             res.json(dbWorkouts);
